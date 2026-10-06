@@ -252,8 +252,8 @@ function Servicos() {
             <h3 className="text-3xl text-texto">{s.nome}</h3>
             <p className="mt-2 flex-1 text-texto-2">{s.desc}</p>
             <div className="mt-4 flex items-baseline justify-between border-t pt-4">
-              <span className="text-texto-2">{s.dur}</span>
-              <span className="font-display text-3xl text-dourado-escuro">{s.preco}</span>
+              <span className="text-texto-2"><span className="sr-only">Duração:</span>{s.dur}</span>
+              <span className="font-display text-3xl text-dourado-escuro"><span className="sr-only">Preço:</span>{s.preco}</span>
             </div>
             <AgendarLink servico={s.cod} className="btn btn-primary mt-5 w-full">Agendar este serviço</AgendarLink>
           </li>
@@ -277,7 +277,7 @@ function ComoAgendar() {
           <ol className="mt-8 space-y-6">
             {passos.map(([t, d], i) => (
               <li key={t} className="flex gap-4">
-                <span className="on-vinho flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-vinho font-display text-2xl text-dourado">{i + 1}</span>
+                <span aria-hidden="true" className="on-vinho flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-vinho font-display text-2xl text-dourado">{i + 1}</span>
                 <div><h3 className="text-2xl">{t}</h3><p className="text-texto-2">{d}</p></div>
               </li>
             ))}

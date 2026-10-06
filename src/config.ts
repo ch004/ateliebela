@@ -1,4 +1,4 @@
-export const TELEGRAM_BOT = "SEU_BOT";
+export const TELEGRAM_BOT = "Caio_testeaula1bot";
 
 export function telegramLink(servico?: string): string {
   if (servico) {
