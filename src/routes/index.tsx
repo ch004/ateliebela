@@ -28,7 +28,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const TG_LABEL = "Agendar pelo Telegram (abre em nova aba)";
 
 /* ---------- Ícones simples ---------- */
 const Check = ({ className = "h-5 w-5" }: { className?: string }) => (
@@ -49,13 +48,28 @@ const ChatIcon = () => (
 );
 
 /* ---------- Botão de agendar ---------- */
-function AgendarLink({ servico, className, children }: { servico?: string; className: string; children: ReactNode }) {
+function AgendarLink({
+  servico,
+  nome,
+  className,
+  children,
+}: {
+  servico?: string;
+  nome?: string;
+  className: string;
+  children: ReactNode;
+}) {
+  const complemento = nome
+    ? ` — ${nome}, pelo Telegram (abre em nova aba)`
+    : " pelo Telegram (abre em nova aba)";
   return (
-    <a href={telegramLink(servico)} target="_blank" rel="noopener" aria-label={TG_LABEL} className={className}>
+    <a href={telegramLink(servico)} target="_blank" rel="noopener" className={className}>
       {children}
+      <span className="sr-only">{complemento}</span>
     </a>
   );
 }
+
 
 /* ---------- Seção com animação ---------- */
 function Section({ id, labelId, className = "", children }: { id?: string; labelId: string; className?: string; children: ReactNode }) {
@@ -132,7 +146,7 @@ function Index() {
         href={telegramLink()}
         target="_blank"
         rel="noopener"
-        aria-label="Falar com o assistente de agendamento pelo Telegram"
+        aria-label="Falar com o assistente de agendamento pelo Telegram (abre em nova aba)"
         className="on-vinho fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-vinho text-creme shadow-suave hover:bg-vinho-escuro"
       >
         <ChatIcon />
@@ -255,7 +269,7 @@ function Servicos() {
               <span className="text-texto-2"><span className="sr-only">Duração:</span>{s.dur}</span>
               <span className="font-display text-3xl text-dourado-escuro"><span className="sr-only">Preço:</span>{s.preco}</span>
             </div>
-            <AgendarLink servico={s.cod} className="btn btn-primary mt-5 w-full">Agendar este serviço</AgendarLink>
+            <AgendarLink servico={s.cod} nome={s.nome} className="btn btn-primary mt-5 w-full">Agendar este serviço</AgendarLink>
           </li>
         ))}
       </ul>
